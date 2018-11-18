@@ -21,44 +21,32 @@
       var rand = Math.abs(Math.floor(Math.random()*10)) < 6 ? true : false;
 
       function changeInnerStatus(rand){
-        if(rand){ 
-	  inner_state = true;
-        }else{
-	  inner_state = false;
-        }
+        inner_state = rand ? true: false;
       };
-
+      
       function changeOuterStatus(state){
-        if(state){
-          outer_state = true;	
-	}else{
-          outer_state = false;	
-	}
+        outer_state = state ? true: false;
       };
 
       function displayStatus(state){
-        if(state){ 
-          usability.innerHTML = '使用中';
-        }else{
-          usability.innerHTML = '空室中';
-        }
+        usability.innerHTML = state ? '使用中' : '空室中';
       };
 
       function displayCount(state){
         if(state){
           console.log('use');
           outer_cnt++;
-	}else{
+        }else{
           console.log('nouse');
           outer_cnt = 0;
-	}      
+        }      
         time.innerHTML = outer_cnt;
       };
 
       function wrapper(){
-	changeInnerStatus(rand);
+        changeInnerStatus(rand);
         displayStatus(inner_state);
-	changeOuterStatus(inner_state);
+        changeOuterStatus(inner_state);
         displayCount(outer_state);
       };
 
@@ -68,11 +56,11 @@
           break;
         case INTERVAL:
           wrapper();
-	  inner_cnt = 0;
+          inner_cnt = 0;
           break;
-	default:
-	  displayCount(outer_state);
-	  break;
+        default:
+          displayCount(outer_state);
+          break;
       };
 
       inner_cnt++;
