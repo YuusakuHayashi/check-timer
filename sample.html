@@ -10,9 +10,9 @@
     var usability = document.getElementById('usability');
     var time = document.getElementById('time');
 
+    var state = false;
     var outer_cnt = 0;
     var inner_cnt = 0;
-    var state;
     var INTERVAL = 5;
 
     function main(){
@@ -20,12 +20,8 @@
       function getUsability(){
         return Math.abs(Math.floor(Math.random()*10)) < 6 ? true : false; 
       };
-      function getState(rand){
-        return rand ? true: false;
-      };
       function wrapper(){
-        rand = getUsability();					
-        state = getState(rand);			
+        state = getUsability();					
         usability.innerHTML = state ? '使用中' : '空室中';   
         if(state){
           outer_cnt++;
