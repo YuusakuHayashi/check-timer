@@ -12,42 +12,27 @@
 
     var outer_cnt = 0;
     var inner_cnt = 0;
-    var inner_state;
-    var outer_state;
-
+    var state;
     var INTERVAL = 5;
 
-    function timer(){
-      var rand = Math.abs(Math.floor(Math.random()*10)) < 6 ? true : false;
+    function main(){
 
-      function changeInnerStatus(rand){
-        inner_state = rand ? true: false;
+      function getUsability(){
+        return Math.abs(Math.floor(Math.random()*10)) < 6 ? true : false; 
       };
-      
-      function changeOuterStatus(state){
-        outer_state = state ? true: false;
+      function getState(rand){
+        return rand ? true: false;
       };
-
-      function displayStatus(state){
-        usability.innerHTML = state ? '使用中' : '空室中';
-      };
-
-      function displayCount(state){
+      function wrapper(){
+        rand = getUsability();					
+        state = getState(rand);			
+        usability.innerHTML = state ? '使用中' : '空室中';   
         if(state){
-          console.log('use');
           outer_cnt++;
         }else{
-          console.log('nouse');
           outer_cnt = 0;
         }      
         time.innerHTML = outer_cnt;
-      };
-
-      function wrapper(){
-        changeInnerStatus(rand);
-        displayStatus(inner_state);
-        changeOuterStatus(inner_state);
-        displayCount(outer_state);
       };
 
       switch(inner_cnt){
@@ -59,15 +44,20 @@
           inner_cnt = 0;
           break;
         default:
-          displayCount(outer_state);
+          if(state){
+            outer_cnt++;
+          }else{
+            outer_cnt = 0;
+          }      
+          time.innerHTML = outer_cnt;
           break;
       };
 
       inner_cnt++;
 
-      setTimeout(timer, 1000);
+      setTimeout(main, 1000);
     };
-    timer();
+    main();
 
   </script>
 </html>
